@@ -1,0 +1,268 @@
+/* =========================================
+   AnimeGamesHub - Responsive Stylesheet
+   Media Queries for Different Screen Sizes
+   ========================================= */
+
+/* === Large Desktops (1200px and up) === */
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+}
+
+/* === Regular Desktops (992px to 1199px) === */
+@media screen and (max-width: 1199px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .hero-title {
+        font-size: 3.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .newsletter-wrapper {
+        padding: 30px;
+    }
+}
+
+/* === Tablets (768px to 991px) === */
+@media screen and (max-width: 991px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-links li a {
+        font-size: 0.9rem;
+    }
+    
+    .search-input {
+        width: 150px;
+    }
+    
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    
+    .newsletter-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .newsletter-content {
+        margin-bottom: 30px;
+    }
+    
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Game Detail Page */
+    .game-detail-wrapper {
+        flex-direction: column;
+    }
+    
+    .game-info-column, .game-frame-column {
+        width: 100%;
+    }
+    
+    .game-info-column {
+        margin-bottom: 30px;
+    }
+}
+
+/* === Large Mobile (576px to 767px) === */
+@media screen and (max-width: 767px) {
+    .container {
+        max-width: 540px;
+    }
+    
+    .nav-wrapper {
+        position: relative;
+    }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 15px;
+        border-radius: 0 0 15px 15px;
+        border: 1px solid var(--glass-border);
+        z-index: 10;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .search-container {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        margin-top: 10px;
+        display: none;
+    }
+    
+    .search-container.active {
+        display: flex;
+    }
+    
+    .search-input {
+        width: 100%;
+    }
+    
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .mobile-only {
+        display: block;
+    }
+    
+    #categoriesBtn {
+        display: none;
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .game-meta {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input {
+        width: 100%;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    /* Game Detail Page */
+    .share-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .share-button {
+        width: 100%;
+    }
+}
+
+/* === Small Mobile (Up to 575px) === */
+@media screen and (max-width: 575px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+    
+    .game-title {
+        font-size: 1rem;
+    }
+    
+    .categories-section .category-card {
+        min-width: 110px;
+    }
+    
+    .newsletter-wrapper {
+        padding: 20px;
+    }
+    
+    .newsletter-content h2 {
+        font-size: 1.6rem;
+    }
+    
+    /* Game Detail Page */
+    .game-detail-title {
+        font-size: 1.8rem;
+    }
+    
+    .rating-stars .star {
+        font-size: 1.8rem;
+    }
+    
+    .game-meta {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .breadcrumbs {
+        display: none;
+    }
+}
+
+/* === Specific Override for Menu Toggle Animation === */
+@media screen and (max-width: 767px) {
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+}

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Dynamic meta title and description will be set via JavaScript -->
+    <meta name="description" content="">
+    <title>Game Title - AnimeGamesHub</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/game-detail.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Schema.org structured data for SEO (will be dynamically updated via JavaScript) -->
+    <script type="application/ld+json" id="gameSchema">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "",
+        "description": "",
+        "image": "",
+        "url": "",
+        "genre": "",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "",
+            "reviewCount": "",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="cyberpunk-overlay"></div>
+    
+    <!-- Header (Same as index.html) -->
+    <header class="glass-nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="neon-text">Anime</span><span class="glow-text">Games</span><span class="cyber-text">Hub</span>
+                    </a>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html" class="neon-button">Home</a></li>
+                        <li><a href="#" class="neon-button" id="categoriesBtn">Categories</a></li>
+                        <li><a href="#" class="neon-button">Top Rated</a></li>
+                        <li><a href="#" class="neon-button">New Games</a></li>
+                        <li><a href="#" class="neon-button vip-button">VIP Access</a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <input type="text" placeholder="Search games..." class="search-input">
+                    <button class="search-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories Dropdown (Same as index.html) -->
+    <div class="categories-dropdown" id="categoriesDropdown">
+        <div class="container">
+            <div class="categories-grid">
+                <a href="#" class="category-card" data-category="rpg">
+                    <div class="category-icon">🎭</div>
+                    <h3>RPG</h3>
+                </a>
+                <a href="#" class="category-card" data-category="romance">
+                    <div class="category-icon">💖</div>
+                    <h3>Romance</h3>
+                </a>
+                <a href="#" class="category-card" data-category="tower-defense">
+                    <div class="category-icon">🏰</div>
+                    <h3>Tower Defense</h3>
+                </a>
+                <a href="#" class="category-card" data-category="adventure">
+                    <div class="category-icon">🗺️</div>
+                    <h3>Adventure</h3>
+                </a>
+                <a href="#" class="category-card" data-category="idle">
+                    <div class="category-icon">⏳</div>
+                    <h3>Idle Games</h3>
+                </a>
+                <a href="#" class="category-card" data-category="action">
+                    <div class="category-icon">⚔️</div>
+                    <h3>Action</h3>
+                </a>
+                <a href="#" class="category-card" data-category="puzzle">
+                    <div class="category-icon">🧩</div>
+                    <h3>Puzzle</h3>
+                </a>
+                <a href="#" class="category-card" data-category="simulation">
+                    <div class="category-icon">🏙️</div>
+                    <h3>Simulation</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" id="categoryBreadcrumb">Category</a></li>
+                <li id="gameTitleBreadcrumb">Game Title</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Game Detail Section -->
+    <section class="game-detail-section">
+        <div class="container">
+            <div class="game-detail-wrapper">
+                <!-- Game Info -->
+                <div class="game-info-column">
+                    <h1 id="gameTitle" class="game-detail-title">Game Title</h1>
+                    
+                    <div class="game-meta">
+                        <div class="game-category-badge" id="gameCategory">Category</div>
+                        <div class="game-rating">
+                            <div class="stars" id="gameRatingStars"></div>
+                            <span class="rating-count" id="gameRatingCount">(0 ratings)</span>
+                        </div>
+                        <div class="game-plays">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <span id="gamePlaysCount">0 plays</span>
+                        </div>
+                    </div>
+                    
+                    <div class="game-cover">
+                        <img id="gameCover" src="images/placeholder-game.jpg" alt="Game Title">
+                    </div>
+                    
+                    <div class="game-description">
+                        <h2>About This Game</h2>
+                        <p id="gameDescription">Loading game description...</p>
+                    </div>
+                    
+                    <div class="game-controls">
+                        <div class="controls-section">
+                            <h3>Controls</h3>
+                            <ul id="gameControls">
+                                <li>Loading controls information...</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="social-share">
+                        <h3>Share This Game</h3>
+                        <div class="share-buttons">
+                            <button class="share-button twitter">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                                Twitter
+                            </button>
+                            <button class="share-button facebook">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                                Facebook
+                            </button>
+                            <button class="share-button tiktok">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8.28a3 3 0 1 1-3-3"></path><path d="M16 8.55c1.84.63 3 2.35 3 4.45a5 5 0 0 1-10 0"></path><path d="M2 12h8"></path><path d="M16 8.5V6a2 2 0 0 1 4 0v1"></path></svg>
+                                TikTok
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Game Frame -->
+                <div class="game-frame-column">
+                    <div class="game-frame-wrapper">
+                        <div class="game-frame-header">
+                            <button id="fullscreenBtn" class="fullscreen-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+                            </button>
+                        </div>
+                        <div class="game-frame-container">
+                            <iframe id="gameFrame" src="about:blank" allowfullscreen></iframe>
+                            <div class="game-loading" id="gameLoading">
+                                <div class="spinner"></div>
+                                <p>Loading Game...</p>
+                            </div>
+                        </div>
+                        <div class="game-frame-footer">
+                            <button id="likeBtn" class="like-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                Like
+                            </button>
+                            <button id="favoriteBtn" class="favorite-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                Add to Favorites
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Rate This Game -->
+                    <div class="rate-game glass-card">
+                        <h3>Rate This Game</h3>
+                        <div class="rating-stars">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <textarea placeholder="Write your review (optional)"></textarea>
+                        <button class="submit-rating">Submit Rating</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Comments -->
+            <div class="game-comments glass-card">
+                <h2>Player Reviews</h2>
+                <div class="comments-container" id="commentsContainer">
+                    <!-- Comments will be loaded dynamically -->
+                    <div class="no-comments" id="noComments">
+                        <p>No reviews yet. Be the first to share your thoughts!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Games Section -->
+    <section class="related-games-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">You May Also Like</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="games-grid related-games">
+                <!-- Related game cards will be populated dynamically via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Same as index.html) -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-title">AnimeGamesHub</h3>
+                    <p>The ultimate destination for anime and cyberpunk game enthusiasts. Discover, play, and share your favorite HTML5 games.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="TikTok">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8.28a3 3 0 1 1-3-3"></path><path d="M16 8.55c1.84.63 3 2.35 3 4.45a5 5 0 0 1-10 0"></path><path d="M2 12h8"></path><path d="M16 8.5V6a2 2 0 0 1 4 0v1"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Top Rated</a></li>
+                        <li><a href="#">New Games</a></li>
+                        <li><a href="#">VIP Access</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">RPG</a></li>
+                        <li><a href="#">Romance</a></li>
+                        <li><a href="#">Tower Defense</a></li>
+                        <li><a href="#">Adventure</a></li>
+                        <li><a href="#">Idle Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">For Developers</a></li>
+                        <li><a href="#">Advertise with Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AnimeGamesHub.com - All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Game Comment Template -->
+    <template id="comment-template">
+        <div class="comment">
+            <div class="comment-header">
+                <div class="comment-avatar">
+                    <img src="images/placeholder.svg" alt="">
+                </div>
+                <div class="comment-meta">
+                    <div class="comment-author"></div>
+                    <div class="comment-date"></div>
+                </div>
+                <div class="comment-rating">
+                    <div class="stars"></div>
+                </div>
+            </div>
+            <div class="comment-body"></div>
+        </div>
+    </template>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/game-detail.js"></script>
+</body>
+</html>

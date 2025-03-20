@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#1E1E32" x="0" y="0" width="800" height="600"></rect>
+        <text font-family="Arial" font-size="72" font-weight="bold" fill="#42D3FF">
+            <tspan x="200" y="300">AnimeGamesHub</tspan>
+        </text>
+        <text font-family="Arial" font-size="32" font-weight="normal" fill="#FF42B0">
+            <tspan x="260" y="350">Image Placeholder</tspan>
+        </text>
+    </g>
+</svg>

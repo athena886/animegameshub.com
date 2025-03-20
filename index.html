@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AnimeGamesHub - The ultimate collection of anime-style HTML5 games for ACG lovers worldwide. Play the best anime and cyberpunk games for free!">
+    <title>AnimeGamesHub - Play Free Anime HTML5 Games Online</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/language-switcher.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Schema.org structured data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AnimeGamesHub",
+        "url": "https://animegameshub.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://animegameshub.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "description": "The ultimate collection of anime-style HTML5 games for ACG lovers worldwide. Play the best anime and cyberpunk games for free!"
+    }
+    </script>
+</head>
+<body>
+    <div class="cyberpunk-overlay"></div>
+    
+    <!-- Header -->
+    <header class="glass-nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="neon-text">Anime</span><span class="glow-text">Games</span><span class="cyber-text">Hub</span>
+                    </a>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html" class="neon-button" data-i18n="nav.home">Home</a></li>
+                        <li><a href="#" class="neon-button" id="categoriesBtn" data-i18n="nav.categories">Categories</a></li>
+                        <li><a href="#" class="neon-button" data-i18n="nav.topRated">Top Rated</a></li>
+                        <li><a href="#" class="neon-button" data-i18n="nav.newGames">New Games</a></li>
+                        <li><a href="#" class="neon-button vip-button" data-i18n="nav.vipAccess">VIP Access</a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <input type="text" placeholder="Search games..." class="search-input" data-i18n="common.search">
+                    <button class="search-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories Dropdown -->
+    <div class="categories-dropdown" id="categoriesDropdown">
+        <div class="container">
+            <div class="categories-grid">
+                <a href="#" class="category-card" data-category="rpg" data-i18n="category.rpg">
+                    <div class="category-icon">🎭</div>
+                    <h3>RPG</h3>
+                </a>
+                <a href="#" class="category-card" data-category="romance" data-i18n="category.romance">
+                    <div class="category-icon">💖</div>
+                    <h3>Romance</h3>
+                </a>
+                <a href="#" class="category-card" data-category="tower-defense" data-i18n="category.towerDefense">
+                    <div class="category-icon">🏰</div>
+                    <h3>Tower Defense</h3>
+                </a>
+                <a href="#" class="category-card" data-category="adventure" data-i18n="category.adventure">
+                    <div class="category-icon">🗺️</div>
+                    <h3>Adventure</h3>
+                </a>
+                <a href="#" class="category-card" data-category="idle" data-i18n="category.idle">
+                    <div class="category-icon">⏳</div>
+                    <h3>Idle Games</h3>
+                </a>
+                <a href="#" class="category-card" data-category="action" data-i18n="category.action">
+                    <div class="category-icon">⚔️</div>
+                    <h3>Action</h3>
+                </a>
+                <a href="#" class="category-card" data-category="puzzle" data-i18n="category.puzzle">
+                    <div class="category-icon">🧩</div>
+                    <h3>Puzzle</h3>
+                </a>
+                <a href="#" class="category-card" data-category="simulation" data-i18n="category.simulation">
+                    <div class="category-icon">🏙️</div>
+                    <h3>Simulation</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">The Ultimate <span class="highlight">Anime Gaming</span> Experience</h1>
+            <p class="hero-subtitle">Discover and play the best HTML5 anime games with stunning cyberpunk aesthetics</p>
+            <div class="hero-buttons">
+                <a href="#featured" class="primary-button" data-i18n="hero.popularGames">Popular Games</a>
+                <a href="#newest" class="secondary-button" data-i18n="hero.latestReleases">Latest Releases</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Games Section -->
+    <section class="games-section" id="featured">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🔥 Hot Games</h2>
+                <a href="#" class="view-all" data-i18n="section.viewAll">View All</a>
+            </div>
+            <div class="games-grid featured-games">
+                <!-- Game cards will be populated dynamically via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newest Games Section -->
+    <section class="games-section" id="newest">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📅 Latest Releases</h2>
+                <a href="#" class="view-all" data-i18n="section.viewAll">View All</a>
+            </div>
+            <div class="games-grid newest-games">
+                <!-- Game cards will be populated dynamically via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section (Mobile Only) -->
+    <section class="categories-section mobile-only">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🎮 Game Categories</h2>
+            </div>
+            <div class="categories-slider">
+                <a href="#" class="category-card" data-category="rpg" data-i18n="category.rpg">
+                    <div class="category-icon">🎭</div>
+                    <h3>RPG</h3>
+                </a>
+                <a href="#" class="category-card" data-category="romance" data-i18n="category.romance">
+                    <div class="category-icon">💖</div>
+                    <h3>Romance</h3>
+                </a>
+                <a href="#" class="category-card" data-category="tower-defense" data-i18n="category.towerDefense">
+                    <div class="category-icon">🏰</div>
+                    <h3>Tower Defense</h3>
+                </a>
+                <a href="#" class="category-card" data-category="adventure" data-i18n="category.adventure">
+                    <div class="category-icon">🗺️</div>
+                    <h3>Adventure</h3>
+                </a>
+                <a href="#" class="category-card" data-category="idle" data-i18n="category.idle">
+                    <div class="category-icon">⏳</div>
+                    <h3>Idle Games</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Rated Section -->
+    <section class="games-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🌟 Top Rated</h2>
+                <a href="#" class="view-all" data-i18n="section.viewAll">View All</a>
+            </div>
+            <div class="games-grid top-rated-games">
+                <!-- Game cards will be populated dynamically via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-wrapper glass-card">
+                <div class="newsletter-content">
+                    <h2>Stay Updated with New Games</h2>
+                    <p>Subscribe to our newsletter and never miss out on the latest releases!</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="neon-button" data-i18n="newsletter.subscribe">Subscribe</button>
+                    </form>
+                </div>
+                <div class="newsletter-image">
+                    <img src="images/placeholder.svg" alt="Anime character">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-title">AnimeGamesHub</h3>
+                    <p>The ultimate destination for anime and cyberpunk game enthusiasts. Discover, play, and share your favorite HTML5 games.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="TikTok">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8.28a3 3 0 1 1-3-3"></path><path d="M16 8.55c1.84.63 3 2.35 3 4.45a5 5 0 0 1-10 0"></path><path d="M2 12h8"></path><path d="M16 8.5V6a2 2 0 0 1 4 0v1"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html" data-i18n="footer.home">Home</a></li>
+                        <li><a href="#" data-i18n="footer.categories">Categories</a></li>
+                        <li><a href="#" data-i18n="footer.topRated">Top Rated</a></li>
+                        <li><a href="#" data-i18n="footer.newGames">New Games</a></li>
+                        <li><a href="#" data-i18n="footer.vipAccess">VIP Access</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-i18n="category.rpg">RPG</a></li>
+                        <li><a href="#" data-i18n="category.romance">Romance</a></li>
+                        <li><a href="#" data-i18n="category.towerDefense">Tower Defense</a></li>
+                        <li><a href="#" data-i18n="category.adventure">Adventure</a></li>
+                        <li><a href="#" data-i18n="category.idle">Idle Games</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-i18n="footer.contactUs">Contact Us</a></li>
+                        <li><a href="#" data-i18n="footer.privacyPolicy">Privacy Policy</a></li>
+                        <li><a href="#" data-i18n="footer.termsOfService">Terms of Service</a></li>
+                        <li><a href="#" data-i18n="footer.forDevelopers">For Developers</a></li>
+                        <li><a href="#" data-i18n="footer.advertiseWithUs">Advertise with Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AnimeGamesHub.com - All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Game Template for JavaScript -->
+    <template id="game-card-template">
+        <div class="game-card">
+            <div class="game-thumbnail">
+                <span class="game-category"></span>
+                <img src="" alt="" class="game-image">
+                <div class="game-overlay">
+                    <button class="play-button" data-i18n="game.playNow">Play Now</button>
+                </div>
+            </div>
+            <div class="game-info">
+                <h3 class="game-title"></h3>
+                <div class="game-meta">
+                    <div class="rating">
+                        <div class="stars"></div>
+                        <span class="rating-count"></span>
+                    </div>
+                    <span class="game-plays"><span class="plays-count"></span> plays</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/language.js"></script>
+</body>
+</html>
