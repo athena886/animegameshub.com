@@ -245,7 +245,32 @@ function loadGameFrame(iframeUrl) {
         // 显示加载状态
         if (gameLoading) {
             gameLoading.style.display = 'flex';
+            
+            // 显示加载进度提示
+            const loadingText = document.createElement('div');
+            loadingText.id = 'loadingProgressText';
+            loadingText.innerText = 'Connecting to game server...';
+            loadingText.style.marginTop = '15px';
+            loadingText.style.color = '#42D3FF';
+            gameLoading.appendChild(loadingText);
+            
+            // 模拟加载进度
+            simulateLoadingProgress(loadingText);
         }
+        
+        // 预先连接到游戏资源域，提高加载速度
+        addPreconnect(extractDomain(finalUrl));
+        
+        // 监控iframe加载情况并设置超时处理
+        const loadTimeout = setTimeout(() => {
+            if (gameLoading && gameLoading.style.display !== 'none') {
+                const loadingText = document.getElementById('loadingProgressText');
+                if (loadingText) {
+                    loadingText.innerText = 'Game server is responding slowly. Please wait...';
+                    loadingText.style.color = '#FF42B0';
+                }
+            }
+        }, 10000); // 10秒超时
         
         // 设置iframe的src属性
         gameFrame.src = finalUrl;
@@ -253,18 +278,38 @@ function loadGameFrame(iframeUrl) {
         // 添加加载事件监听器
         gameFrame.onload = function() {
             console.log('游戏iframe加载完成');
+            clearTimeout(loadTimeout);
+            
             // 移除加载状态
             if (gameLoading) {
                 gameLoading.style.display = 'none';
+                const loadingProgressText = document.getElementById('loadingProgressText');
+                if (loadingProgressText) {
+                    loadingProgressText.remove();
+                }
             }
             
             // 显示iframe
             gameFrame.style.display = 'block';
+            
+            // 添加游戏加载完成的通知
+            showGameLoadedNotification();
         };
         
         // 添加错误处理
         gameFrame.onerror = function(error) {
             console.error('加载游戏iframe时出错:', error);
+            clearTimeout(loadTimeout);
+            
+            if (gameLoading) {
+                const loadingText = document.getElementById('loadingProgressText');
+                if (loadingText) {
+                    loadingText.innerText = 'Error loading game. Trying alternative source...';
+                    loadingText.style.color = '#FF42B0';
+                }
+            }
+            
+            // 尝试使用默认iframe
             gameFrame.src = defaultIframeUrl;
         };
         
@@ -273,6 +318,139 @@ function loadGameFrame(iframeUrl) {
         // 使用默认iframe
         gameFrame.src = "https://html5.gamedistribution.com/rvvASMiM/c84aa267dd0d4c7c8ef5c16c600a3adb/";
     }
+}
+
+/**
+ * 从URL中提取域名
+ * @param {string} url - 完整URL
+ * @returns {string} 域名
+ */
+function extractDomain(url) {
+    try {
+        const urlObj = new URL(url);
+        return urlObj.origin;
+    } catch (error) {
+        console.error('提取域名时出错:', error);
+        return '';
+    }
+}
+
+/**
+ * 添加预连接提示，提高加载速度
+ * @param {string} domain - 需要预连接的域名
+ */
+function addPreconnect(domain) {
+    if (!domain) return;
+    
+    // 检查是否已经存在预连接标签
+    const existingLinks = document.head.querySelectorAll('link[rel="preconnect"]');
+    for (const link of existingLinks) {
+        if (link.href === domain) return;
+    }
+    
+    // 添加预连接标签
+    const preconnect = document.createElement('link');
+    preconnect.rel = 'preconnect';
+    preconnect.href = domain;
+    document.head.appendChild(preconnect);
+    
+    // 添加DNS预取
+    const dnsPrefetch = document.createElement('link');
+    dnsPrefetch.rel = 'dns-prefetch';
+    dnsPrefetch.href = domain;
+    document.head.appendChild(dnsPrefetch);
+    
+    console.log('添加预连接到:', domain);
+}
+
+/**
+ * 模拟加载进度以提供更好的用户体验
+ * @param {HTMLElement} loadingText - 加载文本元素
+ */
+function simulateLoadingProgress(loadingText) {
+    if (!loadingText) return;
+    
+    const stages = [
+        'Connecting to game server...',
+        'Downloading game resources...',
+        'Preparing game environment...',
+        'Loading game assets...',
+        'Initializing game engine...',
+        'Almost ready...'
+    ];
+    
+    let currentStage = 0;
+    
+    const progressInterval = setInterval(() => {
+        if (currentStage < stages.length) {
+            loadingText.innerText = stages[currentStage];
+            currentStage++;
+        } else {
+            clearInterval(progressInterval);
+        }
+    }, 2500);
+    
+    // 清理函数，避免内存泄漏
+    loadingText.progressInterval = progressInterval;
+    loadingText.cleanup = function() {
+        clearInterval(this.progressInterval);
+    };
+}
+
+/**
+ * 游戏加载完成后显示通知
+ */
+function showGameLoadedNotification() {
+    // 创建通知元素
+    const notification = document.createElement('div');
+    notification.className = 'game-loaded-notification';
+    notification.innerHTML = `
+        <div class="notification-icon">✓</div>
+        <div class="notification-text">Game loaded successfully! Enjoy playing!</div>
+    `;
+    
+    // 添加样式
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.right = '20px';
+    notification.style.backgroundColor = 'rgba(66, 211, 255, 0.2)';
+    notification.style.backdropFilter = 'blur(10px)';
+    notification.style.border = '1px solid #42D3FF';
+    notification.style.borderRadius = '8px';
+    notification.style.padding = '12px 20px';
+    notification.style.display = 'flex';
+    notification.style.alignItems = 'center';
+    notification.style.boxShadow = '0 0 15px rgba(66, 211, 255, 0.5)';
+    notification.style.zIndex = '9999';
+    notification.style.transition = 'all 0.3s ease';
+    
+    // 图标样式
+    const icon = notification.querySelector('.notification-icon');
+    icon.style.backgroundColor = '#42D3FF';
+    icon.style.color = '#000';
+    icon.style.width = '24px';
+    icon.style.height = '24px';
+    icon.style.borderRadius = '50%';
+    icon.style.display = 'flex';
+    icon.style.alignItems = 'center';
+    icon.style.justifyContent = 'center';
+    icon.style.marginRight = '10px';
+    icon.style.fontWeight = 'bold';
+    
+    // 文本样式
+    const text = notification.querySelector('.notification-text');
+    text.style.color = '#fff';
+    
+    // 添加到文档
+    document.body.appendChild(notification);
+    
+    // 3秒后自动消失
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
 }
 
 /**

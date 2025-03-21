@@ -184,44 +184,36 @@
                 
                 <!-- Game Frame -->
                 <div class="game-frame-column">
-                    <div class="game-frame-wrapper">
-                        <div class="game-frame-header">
+                    <div class="game-frame-container glass-card">
+                        <div class="game-frame-controls">
                             <button id="fullscreenBtn" class="fullscreen-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
                             </button>
                         </div>
-                        <div class="game-frame-container">
-                            <iframe id="gameFrame" src="about:blank" allowfullscreen></iframe>
-                            <div class="game-loading" id="gameLoading">
-                                <div class="spinner"></div>
-                                <p>Loading Game...</p>
+                        <div id="gameLoading" class="game-loading">
+                            <div class="loading-spinner">
+                                <div class="spinner-ring"></div>
+                            </div>
+                            <div class="loading-tips">
+                                <p>Pro tip: For a smoother gaming experience, make sure you have a stable internet connection.</p>
                             </div>
                         </div>
-                        <div class="game-frame-footer">
-                            <button id="likeBtn" class="like-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                Like
-                            </button>
-                            <button id="favoriteBtn" class="favorite-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                                Add to Favorites
-                            </button>
-                        </div>
+                        <iframe id="gameFrame" src="about:blank" allowfullscreen></iframe>
                     </div>
-                    
-                    <!-- Rate This Game -->
-                    <div class="rate-game glass-card">
-                        <h3>Rate This Game</h3>
-                        <div class="rating-stars">
-                            <span class="star" data-rating="1">★</span>
-                            <span class="star" data-rating="2">★</span>
-                            <span class="star" data-rating="3">★</span>
-                            <span class="star" data-rating="4">★</span>
-                            <span class="star" data-rating="5">★</span>
-                        </div>
-                        <textarea placeholder="Write your review (optional)"></textarea>
-                        <button class="submit-rating">Submit Rating</button>
+                </div>
+                
+                <!-- Rate This Game -->
+                <div class="rate-game glass-card">
+                    <h3>Rate This Game</h3>
+                    <div class="rating-stars">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
                     </div>
+                    <textarea placeholder="Write your review (optional)"></textarea>
+                    <button class="submit-rating">Submit Rating</button>
                 </div>
             </div>
 

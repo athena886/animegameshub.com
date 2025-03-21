@@ -245,17 +245,59 @@
 
 .game-frame-container {
     position: relative;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
-    background: #000;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(66, 211, 255, 0.3);
+    border: 1px solid rgba(66, 211, 255, 0.3);
+    aspect-ratio: 16 / 9;
+    background-color: rgba(10, 10, 25, 0.8);
+    transition: all 0.3s ease;
 }
 
-iframe#gameFrame {
+.game-frame-container:hover {
+    box-shadow: 0 0 30px rgba(255, 66, 176, 0.4);
+    border-color: rgba(255, 66, 176, 0.4);
+}
+
+.game-frame-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+    display: flex;
+    gap: 10px;
+}
+
+.fullscreen-button {
+    background-color: rgba(10, 10, 25, 0.7);
+    border: 1px solid rgba(66, 211, 255, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #42D3FF;
+    transition: all 0.2s ease;
+}
+
+.fullscreen-button:hover {
+    background-color: rgba(66, 211, 255, 0.2);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+#gameFrame {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     border: none;
+    display: none;
+    background-color: #000;
 }
 
 .game-loading {
@@ -266,25 +308,110 @@ iframe#gameFrame {
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 2;
+    align-items: center;
+    background-color: rgba(10, 10, 20, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 10;
+    border-radius: 8px;
 }
 
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(255, 255, 255, 0.1);
+.loading-spinner {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.spinner-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border: 3px solid transparent;
+    border-top-color: #FF42B0;
     border-radius: 50%;
-    border-top-color: var(--primary);
-    animation: spin 1s ease-in-out infinite;
-    margin-bottom: 15px;
+    animation: loading-spinner 1.5s linear infinite;
+    position: relative;
 }
 
-@keyframes spin {
-    to {
+.spinner-ring:before, .spinner-ring:after {
+    content: '';
+    position: absolute;
+    border: 3px solid transparent;
+    border-radius: 50%;
+}
+
+.spinner-ring:before {
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-top-color: #42D3FF;
+    animation: loading-spinner 2s linear infinite;
+}
+
+.spinner-ring:after {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-top-color: #FF42B0;
+    animation: loading-spinner 1.5s linear infinite;
+}
+
+@keyframes loading-spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
         transform: rotate(360deg);
+    }
+}
+
+.loading-tips {
+    max-width: 80%;
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px;
+    background-color: rgba(66, 211, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(66, 211, 255, 0.3);
+}
+
+#loadingProgressText {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 0 0 10px rgba(66, 211, 255, 0.8);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.game-loaded-notification {
+    animation: slide-in 0.3s ease forwards;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
@@ -536,5 +663,36 @@ iframe#gameFrame {
     
     .breadcrumbs {
         display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    .game-frame-container {
+        aspect-ratio: 4 / 3;
+    }
+    
+    .spinner-ring {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .loading-tips {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-detail-wrapper {
+        flex-direction: column;
+    }
+    
+    .game-info-column, 
+    .game-frame-column {
+        width: 100%;
+    }
+    
+    .game-frame-column {
+        order: -1;
+        margin-bottom: 20px;
     }
 }
