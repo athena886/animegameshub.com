@@ -1,0 +1,1057 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Anime Games Hub | Anime Games Center</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --primary-color: #42D3FF;
+                --accent-color: #FF42B0;
+                --background-color: #0a0a12;
+                --card-background: rgba(25, 25, 35, 0.7);
+                --text-color: #E0E0E0;
+                --button-gradient: linear-gradient(to right, #42D3FF, #3ba8cc);
+            }
+            
+            body {
+                font-family: 'Zen Maru Gothic', sans-serif;
+                background-color: var(--background-color);
+                color: var(--text-color);
+                margin: 0;
+                padding: 0;
+                line-height: 1.6;
+                background-image: linear-gradient(to bottom, #0a0a18, #141428);
+            }
+            
+            /* Container styles */
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            
+            /* Header navigation styles */
+            header {
+                background-color: rgba(10, 10, 25, 0.9);
+                padding: 15px 0;
+                border-bottom: 1px solid var(--primary-color);
+                box-shadow: 0 0 15px rgba(66, 211, 255, 0.3);
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                backdrop-filter: blur(10px);
+            }
+            
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .logo-text {
+                font-family: 'Press Start 2P', cursive;
+                color: var(--primary-color);
+                font-size: 1.5rem;
+                text-shadow: 0 0 10px rgba(66, 211, 255, 0.5);
+                animation: glow 2s ease-in-out infinite alternate;
+            }
+            
+            .logo-tagline {
+                color: var(--accent-color);
+                font-size: 0.8rem;
+                margin-top: 5px;
+            }
+            
+            nav {
+                display: flex;
+                gap: 20px;
+            }
+            
+            nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                padding: 5px 10px;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+            
+            nav a:hover, nav a.active {
+                background-color: rgba(66, 211, 255, 0.2);
+                color: var(--primary-color);
+            }
+            
+            /* Main content styles */
+            main {
+                padding: 40px 0;
+            }
+            
+            .hero {
+                text-align: center;
+                margin-bottom: 60px;
+                padding: 40px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+                color: var(--text-color);
+            }
+            
+            .hero .highlight {
+                color: var(--primary-color);
+                text-shadow: 0 0 10px rgba(66, 211, 255, 0.5);
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+                color: rgba(224, 224, 224, 0.8);
+            }
+            
+            .search-bar {
+                max-width: 600px;
+                margin: 0 auto;
+                display: flex;
+                overflow: hidden;
+                border-radius: 50px;
+                border: 1px solid rgba(66, 211, 255, 0.3);
+                background-color: rgba(25, 25, 35, 0.5);
+                backdrop-filter: blur(5px);
+            }
+            
+            .search-bar input {
+                flex: 1;
+                padding: 15px 20px;
+                border: none;
+                background: transparent;
+                color: var(--text-color);
+                font-size: 1rem;
+                outline: none;
+            }
+            
+            .search-bar button {
+                padding: 15px 30px;
+                border: none;
+                background: linear-gradient(to right, var(--primary-color), #3ba8cc);
+                color: #111;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .search-bar button:hover {
+                background: linear-gradient(to right, #3ba8cc, var(--primary-color));
+            }
+            
+            /* Game grid styles */
+            .games-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 30px;
+            }
+            
+            .game-card {
+                background-color: var(--card-background);
+                border-radius: 10px;
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                border: 1px solid rgba(66, 211, 255, 0.2);
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                backdrop-filter: blur(10px);
+                cursor: pointer;
+            }
+            
+            .game-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 30px rgba(66, 211, 255, 0.2);
+            }
+            
+            .game-image {
+                position: relative;
+                height: 200px;
+                overflow: hidden;
+            }
+            
+            .game-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+            
+            .game-card:hover .game-image img {
+                transform: scale(1.05);
+            }
+            
+            .game-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .game-card:hover .game-overlay {
+                opacity: 1;
+            }
+            
+            .play-button {
+                padding: 10px 25px;
+                background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+                color: #fff;
+                border: none;
+                border-radius: 50px;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+            }
+            
+            .play-button:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 15px rgba(66, 211, 255, 0.5);
+            }
+            
+            .game-info {
+                padding: 20px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .game-info h3 {
+                margin-top: 0;
+                margin-bottom: 10px;
+                color: var(--primary-color);
+                font-size: 1.3rem;
+                text-shadow: 0 0 5px rgba(66, 211, 255, 0.3);
+            }
+            
+            .game-info p {
+                margin-bottom: 20px;
+                color: rgba(224, 224, 224, 0.8);
+                flex: 1;
+            }
+            
+            .game-meta {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 15px;
+                color: rgba(224, 224, 224, 0.7);
+                font-size: 0.9rem;
+            }
+            
+            .players-count, .rating {
+                display: flex;
+                align-items: center;
+            }
+            
+            .icon {
+                margin-right: 5px;
+                font-style: normal;
+            }
+            
+            .tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .tags span {
+                background: rgba(66, 211, 255, 0.1);
+                color: var(--primary-color);
+                padding: 3px 10px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                transition: background 0.3s ease;
+            }
+            
+            .tags span:hover {
+                background: rgba(66, 211, 255, 0.2);
+            }
+            
+            /* Footer styles */
+            footer {
+                background-color: rgba(10, 10, 25, 0.9);
+                padding: 30px 0;
+                text-align: center;
+                border-top: 1px solid var(--primary-color);
+                margin-top: 60px;
+            }
+            
+            footer p {
+                color: rgba(224, 224, 224, 0.6);
+                font-size: 0.9rem;
+            }
+            
+            /* Animation effects */
+            @keyframes glow {
+                from {
+                    text-shadow: 0 0 5px rgba(66, 211, 255, 0.5),
+                                0 0 10px rgba(66, 211, 255, 0.3);
+                }
+                to {
+                    text-shadow: 0 0 10px rgba(66, 211, 255, 0.7),
+                                0 0 20px rgba(66, 211, 255, 0.5),
+                                0 0 30px rgba(66, 211, 255, 0.3);
+                }
+            }
+            
+            /* Responsive design */
+            @media (max-width: 768px) {
+                .games-grid {
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                }
+                
+                .logo-text {
+                    font-size: 1.2rem;
+                }
+                
+                nav {
+                    gap: 10px;
+                }
+                
+                .hero h1 {
+                    font-size: 2rem;
+                }
+            }
+            
+            @media (max-width: 576px) {
+                header .container {
+                    flex-direction: column;
+                    gap: 15px;
+                }
+                
+                .game-controls {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                
+                .control-btn {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <div class="logo-text">Anime Games Hub</div>
+                    <div class="logo-tagline">Anime Games Center</div>
+                </div>
+                <nav>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">Categories</a>
+                    <a href="#">Popular</a>
+                    <a href="#">New Games</a>
+                </nav>
+            </div>
+        </header>
+        
+        <main>
+            <div class="container">
+                <section class="hero">
+                    <h1>Explore the Amazing <span class="highlight">Anime Games</span> World</h1>
+                    <p>Play various anime style games directly in your browser, no download required!</p>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search for games...">
+                        <button>Search</button>
+                    </div>
+                </section>
+                
+                <section class="games-grid">
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/2fbd9b75-fe10-4a0d-94a0-4566461610af.jpg" alt="ANIME GIRLS MEMORY CARD images">
+                            <div class="game-overlay">
+                                <a href="games/2fbd9b75-fe10-4a0d-94a0-4566461610af.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>ANIME GIRLS MEMORY CARD images</h3>
+                            <p>Enjoy playing ANIME GIRLS MEMORY CARD images online for free! This anime-style game provides an imme...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 6372
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.4
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/d00198e8-b754-427a-96fc-789ee361dc13.jpg" alt="Live Avatar Maker  Girls images">
+                            <div class="game-overlay">
+                                <a href="games/d00198e8-b754-427a-96fc-789ee361dc13.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Live Avatar Maker  Girls images</h3>
+                            <p>Enjoy playing Live Avatar Maker  Girls images online for free! This anime-style game provides an imm...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 5357
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.4
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/8f1df148-a3d7-42bc-a9a3-3521ae7065a4.jpg" alt="Anime Love Balls Girls images">
+                            <div class="game-overlay">
+                                <a href="games/8f1df148-a3d7-42bc-a9a3-3521ae7065a4.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Anime Love Balls Girls images</h3>
+                            <p>Enjoy playing Anime Love Balls Girls images online for free! This anime-style game provides an immer...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 6819
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 3.9
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/e5c88dc8-8268-40c0-b274-87e3c986decd.jpg" alt="Chibi Doll Coloring & Dress Up images">
+                            <div class="game-overlay">
+                                <a href="games/e5c88dc8-8268-40c0-b274-87e3c986decd.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Chibi Doll Coloring & Dress Up images</h3>
+                            <p>Enjoy playing Chibi Doll Coloring & Dress Up images online for free! This anime-style game provides ...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 3040
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.2
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/140f6614-c6d5-4ec4-bc76-6199cff3d523.jpg" alt="Winter CosmoFest images">
+                            <div class="game-overlay">
+                                <a href="games/140f6614-c6d5-4ec4-bc76-6199cff3d523.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Winter CosmoFest images</h3>
+                            <p>Enjoy playing Winter CosmoFest images online for free! This anime-style game provides an immersive e...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 2956
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.1
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/bd65eec2-3610-4624-aeea-ab2a2f58d7b7.jpg" alt="Anime Jigsaw Puzzles images">
+                            <div class="game-overlay">
+                                <a href="games/bd65eec2-3610-4624-aeea-ab2a2f58d7b7.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Anime Jigsaw Puzzles images</h3>
+                            <p>Enjoy playing Anime Jigsaw Puzzles images online for free! This anime-style game provides an immersi...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 2680
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 3.6
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/2c85032e-4ba7-4f2f-8156-ae8eab4d5fc4.jpg" alt="Animegao Kigurumi DIY images">
+                            <div class="game-overlay">
+                                <a href="games/2c85032e-4ba7-4f2f-8156-ae8eab4d5fc4.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Animegao Kigurumi DIY images</h3>
+                            <p>Enjoy playing Animegao Kigurumi DIY images online for free! This anime-style game provides an immers...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 4016
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.3
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/826a74de-ac1e-43d9-9873-9c1020fadd9b.jpg" alt="Ninja dash Cozy tactic puzzle images">
+                            <div class="game-overlay">
+                                <a href="games/826a74de-ac1e-43d9-9873-9c1020fadd9b.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Ninja dash Cozy tactic puzzle images</h3>
+                            <p>Enjoy playing Ninja dash Cozy tactic puzzle images online for free! This anime-style game provides a...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 7609
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.4
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/56c4350d-e03f-4f34-b8c0-91913d381e32.jpg" alt="So Different Dragons images">
+                            <div class="game-overlay">
+                                <a href="games/56c4350d-e03f-4f34-b8c0-91913d381e32.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>So Different Dragons images</h3>
+                            <p>Enjoy playing So Different Dragons images online for free! This anime-style game provides an immersi...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 6554
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.4
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/4ef54d73-614b-4755-a6ea-63b77bb3d12b.jpg" alt="MY CUTE PET images">
+                            <div class="game-overlay">
+                                <a href="games/4ef54d73-614b-4755-a6ea-63b77bb3d12b.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>MY CUTE PET images</h3>
+                            <p>Enjoy playing MY CUTE PET images online for free! This anime-style game provides an immersive experi...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 8204
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 3.9
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/ced718bf-4ae9-4130-ba3b-9b2d465c6125.jpg" alt="Lady Pool images">
+                            <div class="game-overlay">
+                                <a href="games/ced718bf-4ae9-4130-ba3b-9b2d465c6125.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Lady Pool images</h3>
+                            <p>Enjoy playing Lady Pool images online for free! This anime-style game provides an immersive experien...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 8144
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.1
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/f5131765-291e-4087-8420-095eeab3b662.jpg" alt="Anigirls Wonderful Clicker images">
+                            <div class="game-overlay">
+                                <a href="games/f5131765-291e-4087-8420-095eeab3b662.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Anigirls Wonderful Clicker images</h3>
+                            <p>Enjoy playing Anigirls Wonderful Clicker images online for free! This anime-style game provides an i...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 1990
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.8
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/102fbd5f-41a5-4b56-ad34-d7156fa10307.jpg" alt="Cooking in the City of Winds images">
+                            <div class="game-overlay">
+                                <a href="games/102fbd5f-41a5-4b56-ad34-d7156fa10307.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Cooking in the City of Winds images</h3>
+                            <p>Enjoy playing Cooking in the City of Winds images online for free! This anime-style game provides an...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 6675
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 3.6
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/3a3b4f02-90ae-4509-a9f2-f4e0054eff4f.jpg" alt="High School Anime Dress Up images">
+                            <div class="game-overlay">
+                                <a href="games/3a3b4f02-90ae-4509-a9f2-f4e0054eff4f.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>High School Anime Dress Up images</h3>
+                            <p>Enjoy playing High School Anime Dress Up images online for free! This anime-style game provides an i...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 3071
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 3.6
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/95abfbaa-a48d-4192-ae30-0caa5c1ee1a5.jpg" alt="Anime Avatar - Face Maker images (2)">
+                            <div class="game-overlay">
+                                <a href="games/95abfbaa-a48d-4192-ae30-0caa5c1ee1a5.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Anime Avatar - Face Maker images (2)</h3>
+                            <p>Enjoy playing Anime Avatar - Face Maker images (2) online for free! This anime-style game provides a...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 4892
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.5
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/a01f1999-e931-404c-8813-b66ff4aa87ea.jpg" alt="Your Silver Wife images">
+                            <div class="game-overlay">
+                                <a href="games/a01f1999-e931-404c-8813-b66ff4aa87ea.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Your Silver Wife images</h3>
+                            <p>Enjoy playing Your Silver Wife images online for free! This anime-style game provides an immersive e...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 5088
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 3.7
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/77d1a0d0-65e3-49a0-ab6d-6a9c0f386b97.jpg" alt="Animerge images">
+                            <div class="game-overlay">
+                                <a href="games/77d1a0d0-65e3-49a0-ab6d-6a9c0f386b97.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Animerge images</h3>
+                            <p>Enjoy playing Animerge images online for free! This anime-style game provides an immersive experienc...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 5311
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.1
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/c5903f4a-00cf-4785-9de7-1bebf99ae3f7.jpg" alt="Cover Dance Party images">
+                            <div class="game-overlay">
+                                <a href="games/c5903f4a-00cf-4785-9de7-1bebf99ae3f7.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Cover Dance Party images</h3>
+                            <p>Enjoy playing Cover Dance Party images online for free! This anime-style game provides an immersive ...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 5679
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.7
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/90a6b2bf-0a54-4a2e-a5a5-9e29c0c61c39.jpg" alt="My Manga Avatar images">
+                            <div class="game-overlay">
+                                <a href="games/90a6b2bf-0a54-4a2e-a5a5-9e29c0c61c39.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>My Manga Avatar images</h3>
+                            <p>Enjoy playing My Manga Avatar images online for free! This anime-style game provides an immersive ex...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 2027
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 4.7
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/8249a2b8-a15b-4975-8e5b-42d7c5dff1e6.jpg" alt="Find the Anemacilus images">
+                            <div class="game-overlay">
+                                <a href="games/8249a2b8-a15b-4975-8e5b-42d7c5dff1e6.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Find the Anemacilus images</h3>
+                            <p>Enjoy playing Find the Anemacilus images online for free! This anime-style game provides an immersiv...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 5382
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 5.0
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="images/7101fd7f-6520-4c92-a1ce-30106574d660.jpg" alt="Avatar Master - Fix Up Face images">
+                            <div class="game-overlay">
+                                <a href="games/7101fd7f-6520-4c92-a1ce-30106574d660.html" class="play-button">Play Now</a>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Avatar Master - Fix Up Face images</h3>
+                            <p>Enjoy playing Avatar Master - Fix Up Face images online for free! This anime-style game provides an ...</p>
+                            <div class="game-meta">
+                                <div class="players-count">
+                                    <i class="icon">👤</i> 5287
+                                </div>
+                                <div class="rating">
+                                    <i class="icon">⭐</i> 3.5
+                                </div>
+                            </div>
+                            <div class="tags">
+                                
+                                <span>anime</span>
+                                
+                                <span>online</span>
+                                
+                                <span>free</span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </section>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Anime Games Hub | Anime Games Center</p>
+            </div>
+        </footer>
+        
+        <script>
+            // Search functionality
+            document.querySelector('.search-bar button').addEventListener('click', () => {
+                const searchTerm = document.querySelector('.search-bar input').value.toLowerCase();
+                const gameCards = document.querySelectorAll('.game-card');
+                
+                gameCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Add click effect for game cards
+            const gameCards = document.querySelectorAll('.game-card');
+            gameCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // If not clicking the play button, navigate to game page
+                    if (!e.target.classList.contains('play-button')) {
+                        const gameLink = card.querySelector('.play-button').getAttribute('href');
+                        window.location.href = gameLink;
+                    }
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

@@ -1,0 +1,321 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Anime Fantasy RPG - Anime Games Collection</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap">
+        <style>
+            :root {
+                --primary-color: #42D3FF;
+                --accent-color: #FF42B0;
+                --background-color: #0a0a12;
+                --card-background: rgba(25, 25, 35, 0.7);
+                --text-color: #E0E0E0;
+                --button-gradient: linear-gradient(to right, #42D3FF, #3ba8cc);
+            }
+            
+            body {
+                font-family: 'Zen Maru Gothic', sans-serif;
+                background-color: var(--background-color);
+                color: var(--text-color);
+                margin: 0;
+                padding: 0;
+                line-height: 1.6;
+                background-image: linear-gradient(to bottom, #0a0a18, #141428);
+                min-height: 100vh;
+            }
+            
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            
+            header {
+                margin-bottom: 30px;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(66, 211, 255, 0.15);
+            }
+            
+            .back-button {
+                display: inline-flex;
+                align-items: center;
+                color: var(--primary-color);
+                text-decoration: none;
+                font-size: 0.9rem;
+                padding: 8px 15px;
+                border-radius: 5px;
+                border: 1px solid rgba(66, 211, 255, 0.3);
+                background: rgba(66, 211, 255, 0.05);
+                transition: all 0.3s ease;
+            }
+            
+            .back-button:hover {
+                background: rgba(66, 211, 255, 0.15);
+                border-color: rgba(66, 211, 255, 0.5);
+            }
+            
+            .back-button::before {
+                content: '←';
+                margin-right: 8px;
+            }
+            
+            .game-container {
+                background: var(--card-background);
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(66, 211, 255, 0.1);
+                margin-bottom: 40px;
+            }
+            
+            .game-header {
+                padding: 25px;
+                display: flex;
+                align-items: flex-start;
+                gap: 25px;
+                border-bottom: 1px solid rgba(66, 211, 255, 0.15);
+            }
+            
+            .game-thumbnail {
+                width: 150px;
+                height: 150px;
+                overflow: hidden;
+                border-radius: 8px;
+                flex-shrink: 0;
+                border: 2px solid rgba(66, 211, 255, 0.3);
+                position: relative;
+            }
+            
+            .game-thumbnail img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            
+            .game-thumbnail::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, rgba(66, 211, 255, 0.1), transparent);
+                pointer-events: none;
+            }
+            
+            .game-details {
+                flex-grow: 1;
+            }
+            
+            .game-title {
+                font-family: 'Press Start 2P', cursive;
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+                color: var(--primary-color);
+                text-shadow: 0 0 10px rgba(66, 211, 255, 0.5);
+            }
+            
+            .game-description {
+                font-size: 1rem;
+                margin-bottom: 20px;
+                line-height: 1.7;
+            }
+            
+            .game-meta {
+                display: flex;
+                gap: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .game-plays, .game-rating {
+                display: flex;
+                align-items: center;
+                font-size: 0.9rem;
+                color: rgba(224, 224, 224, 0.9);
+            }
+            
+            .game-plays::before {
+                content: '👥';
+                margin-right: 5px;
+                font-size: 1.1rem;
+            }
+            
+            .game-rating::before {
+                content: '⭐';
+                margin-right: 5px;
+                font-size: 1.1rem;
+            }
+            
+            .game-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .tag {
+                background: rgba(66, 211, 255, 0.15);
+                color: var(--primary-color);
+                padding: 5px 12px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                transition: all 0.3s ease;
+            }
+            
+            .tag:hover {
+                background: rgba(66, 211, 255, 0.3);
+                transform: translateY(-2px);
+            }
+            
+            .game-frame-container {
+                padding: 0;
+                position: relative;
+                background: linear-gradient(to bottom, rgba(66, 211, 255, 0.1), rgba(10, 10, 18, 0.7));
+                height: 0;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+                overflow: hidden;
+            }
+            
+            .game-frame-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            
+            .game-controls {
+                display: flex;
+                justify-content: center;
+                padding: 20px;
+                gap: 15px;
+                background: rgba(10, 10, 18, 0.7);
+            }
+            
+            .control-button {
+                background: var(--button-gradient);
+                color: #111;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: 700;
+                transition: all 0.3s ease;
+                font-family: 'Zen Maru Gothic', sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+            
+            .control-button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(66, 211, 255, 0.3);
+            }
+            
+            .fullscreen-button::before {
+                content: '⛶';
+                font-size: 1.2rem;
+            }
+            
+            .reload-button::before {
+                content: '↻';
+                font-size: 1.2rem;
+            }
+            
+            @media (max-width: 768px) {
+                .game-header {
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                }
+                
+                .game-thumbnail {
+                    width: 120px;
+                    height: 120px;
+                }
+                
+                .game-title {
+                    font-size: 1.5rem;
+                }
+                
+                .game-tags {
+                    justify-content: center;
+                }
+                
+                .game-meta {
+                    justify-content: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <a href="../index.html" class="back-button">Back to Games</a>
+            </div>
+        </header>
+        
+        <main class="container">
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="game-thumbnail">
+                        <img src="../images/placeholder_490.jpg" alt="Anime Fantasy RPG">
+                    </div>
+                    <div class="game-details">
+                        <h1 class="game-title">Anime Fantasy RPG</h1>
+                        <div class="game-meta">
+                            <div class="game-plays">34128</div>
+                            <div class="game-rating">4.7</div>
+                        </div>
+                        <p class="game-description">Explore a fantasy world and experience wonderful anime character adventures. Make friends, defeat powerful enemies, and save the world!</p>
+                        <div class="game-tags">
+                            
+                            <span class="tag">RPG</span>
+                            
+                            <span class="tag">Fantasy</span>
+                            
+                            <span class="tag">Adventure</span>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-frame-container">
+                    <iframe src="https://html5.gamedistribution.com/849b591bf5f7413b8a4ca43fc378e40c/" id="gameFrame" allow="fullscreen" allowfullscreen></iframe>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="control-button fullscreen-button" onclick="makeFullscreen()">Fullscreen</button>
+                    <button class="control-button reload-button" onclick="reloadGame()">Reload Game</button>
+                </div>
+            </div>
+        </main>
+        
+        <script>
+            function makeFullscreen() {
+                const gameFrame = document.getElementById('gameFrame');
+                if (gameFrame.requestFullscreen) {
+                    gameFrame.requestFullscreen();
+                } else if (gameFrame.mozRequestFullScreen) {
+                    gameFrame.mozRequestFullScreen();
+                } else if (gameFrame.webkitRequestFullscreen) {
+                    gameFrame.webkitRequestFullscreen();
+                } else if (gameFrame.msRequestFullscreen) {
+                    gameFrame.msRequestFullscreen();
+                }
+            }
+            
+            function reloadGame() {
+                const gameFrame = document.getElementById('gameFrame');
+                gameFrame.src = gameFrame.src;
+            }
+        </script>
+    </body>
+    </html>
+    
