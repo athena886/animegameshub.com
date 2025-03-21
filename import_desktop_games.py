@@ -71,14 +71,22 @@ def categorize_game(title):
     # 默认类别
     return random.choice(["adventure", "casual", "action", "puzzle"])
 
-def process_image(source_path, output_path):
-    """处理游戏图片"""
+def process_image(source_path, target_path):
+    """处理图片并保存到目标路径"""
     try:
-        # 复制图片到输出目录
-        shutil.copy(source_path, output_path)
+        # 打开源图片
+        img = Image.open(source_path)
+        
+        # 调整图片大小为固定尺寸
+        img = img.resize((300, 200), Image.LANCZOS)
+        
+        # 保存处理后的图片为JPG格式
+        img.convert('RGB').save(target_path, 'JPEG', quality=85)
+        
+        print(f"图片处理成功: {target_path}")
         return True
     except Exception as e:
-        print(f"复制图片失败: {e}")
+        print(f"处理图片时出错: {e}")
         return False
 
 def create_placeholder_image(output_path, title):

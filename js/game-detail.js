@@ -246,16 +246,15 @@ function loadGameFrame(iframeUrl) {
         if (gameLoading) {
             gameLoading.style.display = 'flex';
             
-            // 显示加载进度提示
-            const loadingText = document.createElement('div');
-            loadingText.id = 'loadingProgressText';
-            loadingText.innerText = 'Connecting to game server...';
-            loadingText.style.marginTop = '15px';
-            loadingText.style.color = '#42D3FF';
-            gameLoading.appendChild(loadingText);
+            // 获取加载进度文本元素
+            const loadingProgressText = document.getElementById('loadingProgressText');
+            if (loadingProgressText) {
+                loadingProgressText.innerText = 'Connecting to game server...';
+                loadingProgressText.style.display = 'block';
+            }
             
             // 模拟加载进度
-            simulateLoadingProgress(loadingText);
+            simulateLoadingProgress(loadingProgressText);
         }
         
         // 预先连接到游戏资源域，提高加载速度
@@ -264,59 +263,58 @@ function loadGameFrame(iframeUrl) {
         // 监控iframe加载情况并设置超时处理
         const loadTimeout = setTimeout(() => {
             if (gameLoading && gameLoading.style.display !== 'none') {
-                const loadingText = document.getElementById('loadingProgressText');
-                if (loadingText) {
-                    loadingText.innerText = 'Game server is responding slowly. Please wait...';
-                    loadingText.style.color = '#FF42B0';
+                const loadingProgressText = document.getElementById('loadingProgressText');
+                if (loadingProgressText) {
+                    loadingProgressText.innerText = 'Game server is responding slowly. Please wait...';
+                    loadingProgressText.style.color = '#FF42B0';
                 }
             }
         }, 10000); // 10秒超时
         
-        // 设置iframe的src属性
-        gameFrame.src = finalUrl;
+        // 先清空iframe
+        gameFrame.src = 'about:blank';
         
-        // 添加加载事件监听器
-        gameFrame.onload = function() {
-            console.log('游戏iframe加载完成');
-            clearTimeout(loadTimeout);
+        // 适当延迟后设置新的src，以便重置iframe状态
+        setTimeout(() => {
+            // 设置iframe的src属性
+            gameFrame.src = finalUrl;
             
-            // 移除加载状态
-            if (gameLoading) {
-                gameLoading.style.display = 'none';
+            // 添加加载事件监听器
+            gameFrame.onload = function() {
+                console.log('游戏iframe加载完成');
+                clearTimeout(loadTimeout);
+                
+                // 移除加载状态
+                if (gameLoading) {
+                    gameLoading.style.display = 'none';
+                }
+                
+                // 显示游戏加载完成的通知
+                showGameLoadedNotification();
+            };
+            
+            // 添加错误处理
+            gameFrame.onerror = function(error) {
+                console.error('加载游戏iframe时出错:', error);
+                clearTimeout(loadTimeout);
+                
                 const loadingProgressText = document.getElementById('loadingProgressText');
                 if (loadingProgressText) {
-                    loadingProgressText.remove();
+                    loadingProgressText.innerText = 'Error loading game. Trying alternative source...';
+                    loadingProgressText.style.color = '#FF42B0';
                 }
-            }
-            
-            // 显示iframe
-            gameFrame.style.display = 'block';
-            
-            // 添加游戏加载完成的通知
-            showGameLoadedNotification();
-        };
-        
-        // 添加错误处理
-        gameFrame.onerror = function(error) {
-            console.error('加载游戏iframe时出错:', error);
-            clearTimeout(loadTimeout);
-            
-            if (gameLoading) {
-                const loadingText = document.getElementById('loadingProgressText');
-                if (loadingText) {
-                    loadingText.innerText = 'Error loading game. Trying alternative source...';
-                    loadingText.style.color = '#FF42B0';
-                }
-            }
-            
-            // 尝试使用默认iframe
-            gameFrame.src = defaultIframeUrl;
-        };
+                
+                // 尝试使用默认iframe
+                setTimeout(() => {
+                    gameFrame.src = defaultIframeUrl;
+                }, 1500);
+            };
+        }, 100);
         
     } catch (error) {
         console.error('设置游戏iframe时出错:', error);
         // 使用默认iframe
-        gameFrame.src = "https://html5.gamedistribution.com/rvvASMiM/c84aa267dd0d4c7c8ef5c16c600a3adb/";
+        gameFrame.src = defaultIframeUrl;
     }
 }
 
@@ -327,6 +325,10 @@ function loadGameFrame(iframeUrl) {
  */
 function extractDomain(url) {
     try {
+        if (!url || url === 'about:blank') {
+            return '';
+        }
+        
         const urlObj = new URL(url);
         return urlObj.origin;
     } catch (error) {
@@ -374,82 +376,50 @@ function simulateLoadingProgress(loadingText) {
         'Connecting to game server...',
         'Downloading game resources...',
         'Preparing game environment...',
-        'Loading game assets...',
-        'Initializing game engine...',
+        'Setting up game interface...',
         'Almost ready...'
     ];
     
-    let currentStage = 0;
+    let stageIndex = 0;
     
+    // 定时更新加载文本
     const progressInterval = setInterval(() => {
-        if (currentStage < stages.length) {
-            loadingText.innerText = stages[currentStage];
-            currentStage++;
-        } else {
+        if (loadingText.style.display === 'none' || stageIndex >= stages.length) {
             clearInterval(progressInterval);
+            return;
         }
-    }, 2500);
-    
-    // 清理函数，避免内存泄漏
-    loadingText.progressInterval = progressInterval;
-    loadingText.cleanup = function() {
-        clearInterval(this.progressInterval);
-    };
+        
+        loadingText.innerText = stages[stageIndex];
+        stageIndex++;
+    }, 2000); // 每2秒更新一次
 }
 
 /**
- * 游戏加载完成后显示通知
+ * 显示游戏加载完成的通知
  */
 function showGameLoadedNotification() {
     // 创建通知元素
     const notification = document.createElement('div');
-    notification.className = 'game-loaded-notification';
+    notification.classList.add('notification', 'game-loaded-notification');
     notification.innerHTML = `
-        <div class="notification-icon">✓</div>
-        <div class="notification-text">Game loaded successfully! Enjoy playing!</div>
+        <div class="notification-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#42D3FF" stroke-width="2"/>
+                <path d="M8 12L10.5 14.5L16 9" stroke="#42D3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="notification-content">
+            <p>Game loaded successfully! Have fun playing!</p>
+        </div>
     `;
     
-    // 添加样式
-    notification.style.position = 'fixed';
-    notification.style.bottom = '20px';
-    notification.style.right = '20px';
-    notification.style.backgroundColor = 'rgba(66, 211, 255, 0.2)';
-    notification.style.backdropFilter = 'blur(10px)';
-    notification.style.border = '1px solid #42D3FF';
-    notification.style.borderRadius = '8px';
-    notification.style.padding = '12px 20px';
-    notification.style.display = 'flex';
-    notification.style.alignItems = 'center';
-    notification.style.boxShadow = '0 0 15px rgba(66, 211, 255, 0.5)';
-    notification.style.zIndex = '9999';
-    notification.style.transition = 'all 0.3s ease';
-    
-    // 图标样式
-    const icon = notification.querySelector('.notification-icon');
-    icon.style.backgroundColor = '#42D3FF';
-    icon.style.color = '#000';
-    icon.style.width = '24px';
-    icon.style.height = '24px';
-    icon.style.borderRadius = '50%';
-    icon.style.display = 'flex';
-    icon.style.alignItems = 'center';
-    icon.style.justifyContent = 'center';
-    icon.style.marginRight = '10px';
-    icon.style.fontWeight = 'bold';
-    
-    // 文本样式
-    const text = notification.querySelector('.notification-text');
-    text.style.color = '#fff';
-    
-    // 添加到文档
+    // 添加到页面
     document.body.appendChild(notification);
     
-    // 3秒后自动消失
+    // 3秒后自动移除通知
     setTimeout(() => {
         notification.style.opacity = '0';
-        setTimeout(() => {
-            notification.remove();
-        }, 300);
+        setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
