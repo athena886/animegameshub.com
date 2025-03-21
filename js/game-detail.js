@@ -62,23 +62,44 @@ document.addEventListener('DOMContentLoaded', function() {
  * @param {string} gameId - Game ID
  */
 function loadGameDetails(gameId) {
-    // In a real app, you would fetch this data from your backend or a game API
-    // For now, we'll use mock data
+    // 首先检查是否存在桌面导入的游戏数据
+    if (typeof window.desktopGames !== 'undefined' && window.desktopGames.length > 0) {
+        // 从桌面导入的游戏中查找
+        const desktopGame = window.desktopGames.find(game => game.id === gameId);
+        
+        if (desktopGame) {
+            console.log('找到桌面导入的游戏:', desktopGame.title);
+            
+            // 更新页面游戏信息
+            updateGameDetails(desktopGame);
+            
+            // 加载游戏iframe
+            loadGameFrame(desktopGame.iframeUrl);
+            
+            // 加载评论
+            loadComments(gameId);
+            
+            // 更新结构化数据
+            updateStructuredData(desktopGame);
+            
+            return; // 已找到桌面游戏，无需继续处理
+        }
+    }
     
-    // Simulate API call with a slight delay
+    // 如果没有找到桌面导入的游戏，使用模拟数据
     setTimeout(() => {
         const gameDetails = getMockGameDetails(gameId);
         
-        // Update page with game details
+        // 更新页面游戏信息
         updateGameDetails(gameDetails);
         
-        // Load game iframe
+        // 加载游戏iframe
         loadGameFrame(gameDetails.frameUrl);
         
-        // Load comments
+        // 加载评论
         loadComments(gameId);
         
-        // Update schema.org structured data
+        // 更新结构化数据
         updateStructuredData(gameDetails);
         
     }, 500);
@@ -98,7 +119,7 @@ function getMockGameDetails(gameId) {
         'Pixel Kingdom', 'Mecha Warriors', 'Space Odyssey', 'Cyberpunk Rebels',
         'Anime High School', 'Demon Hunter Chronicles', 'Spirit Summoner',
         'Endless Dungeon', 'Idle Anime Heroes', 'Waifu Collector',
-        'Samurai's Path', 'Witch's Apprentice', 'Galactic Princess',
+        'Samurai\'s Path', 'Witch\'s Apprentice', 'Galactic Princess',
         'Phantom Thief Adventure', 'Drift City', 'Neon Street Racing'
     ];
     
@@ -112,7 +133,7 @@ function getMockGameDetails(gameId) {
         'Romance': 'Experience a heartwarming love story where your choices matter. Build relationships with charming characters, each with their own unique personality and storyline. Navigate through romantic scenarios, unlock special events, and discover multiple endings based on your decisions. Perfect for fans of visual novels and dating sims!',
         'Adventure': 'Embark on an epic journey through beautiful anime-inspired landscapes. Solve puzzles, discover hidden treasures, and encounter memorable characters along the way. With intuitive controls and a compelling narrative, this adventure game will keep you engaged from start to finish.',
         'Tower Defense': 'Strategically place your anime defenders to protect your base from waves of adorable yet dangerous enemies. Upgrade your towers, unlock special abilities, and employ different tactics to overcome increasingly challenging levels. Can you create the ultimate defense system?',
-        'Idle': 'Build and manage your own anime empire even while you're away! This idle game features automatic progression, allowing you to earn resources and level up your characters even when not actively playing. Check back regularly to collect rewards and make strategic decisions to accelerate your growth.',
+        'Idle': 'Build and manage your own anime empire even while you\'re away! This idle game features automatic progression, allowing you to earn resources and level up your characters even when not actively playing. Check back regularly to collect rewards and make strategic decisions to accelerate your growth.',
         'Action': 'Test your reflexes in this fast-paced action game featuring fluid combat mechanics and flashy special moves. Chain combos, dodge attacks, and defeat powerful bosses in style. With responsive controls and spectacular visual effects, every battle feels satisfying and intense.',
         'Puzzle': 'Challenge your mind with creative puzzles featuring cute anime characters. Each level presents a unique challenge that requires logical thinking and careful planning. With hundreds of levels and increasing difficulty, this puzzle game provides the perfect mental workout wrapped in a charming anime aesthetic.',
         'Simulation': 'Create and customize your own anime world in this detailed simulation game. Build relationships, decorate your space, and participate in various activities within a vibrant community. Express yourself through character customization and watch your virtual life evolve based on your choices.'
@@ -203,28 +224,54 @@ function updateGameDetails(game) {
 }
 
 /**
- * Load game iframe
- * @param {string} frameUrl - URL for the game iframe
+ * 加载游戏iframe
+ * @param {string} iframeUrl - iframe URL
  */
-function loadGameFrame(frameUrl) {
+function loadGameFrame(iframeUrl) {
     const gameFrame = document.getElementById('gameFrame');
     const gameLoading = document.getElementById('gameLoading');
     
-    if (gameFrame && frameUrl) {
-        // Show loading indicator
+    if (!gameFrame) return;
+    
+    try {
+        // 默认的iframe URL，当提供的URL无效时使用
+        const defaultIframeUrl = "https://html5.gamedistribution.com/rvvASMiM/c84aa267dd0d4c7c8ef5c16c600a3adb/";
+        
+        // 检查URL是否有效
+        const finalUrl = iframeUrl || defaultIframeUrl;
+        
+        console.log('设置游戏iframe:', finalUrl);
+        
+        // 显示加载状态
         if (gameLoading) {
             gameLoading.style.display = 'flex';
         }
         
-        // Set iframe source
-        gameFrame.src = frameUrl;
+        // 设置iframe的src属性
+        gameFrame.src = finalUrl;
         
-        // Hide loading indicator when iframe loads
+        // 添加加载事件监听器
         gameFrame.onload = function() {
+            console.log('游戏iframe加载完成');
+            // 移除加载状态
             if (gameLoading) {
                 gameLoading.style.display = 'none';
             }
+            
+            // 显示iframe
+            gameFrame.style.display = 'block';
         };
+        
+        // 添加错误处理
+        gameFrame.onerror = function(error) {
+            console.error('加载游戏iframe时出错:', error);
+            gameFrame.src = defaultIframeUrl;
+        };
+        
+    } catch (error) {
+        console.error('设置游戏iframe时出错:', error);
+        // 使用默认iframe
+        gameFrame.src = "https://html5.gamedistribution.com/rvvASMiM/c84aa267dd0d4c7c8ef5c16c600a3adb/";
     }
 }
 
@@ -376,7 +423,9 @@ function generateMockGames(count = 6) {
         'Magical Girl Revolution', 'Dragon Soul', 'Sword of the Ancients',
         'Pixel Kingdom', 'Mecha Warriors', 'Space Odyssey', 'Cyberpunk Rebels',
         'Anime High School', 'Demon Hunter Chronicles', 'Spirit Summoner',
-        'Endless Dungeon', 'Idle Anime Heroes', 'Waifu Collector'
+        'Endless Dungeon', 'Idle Anime Heroes', 'Waifu Collector',
+        'Samurai\'s Path', 'Witch\'s Apprentice', 'Galactic Princess',
+        'Phantom Thief Adventure', 'Drift City', 'Neon Street Racing'
     ];
     
     return Array.from({ length: count }, (_, i) => {
